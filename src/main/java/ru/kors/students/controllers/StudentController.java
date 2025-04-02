@@ -1,11 +1,7 @@
 package ru.kors.students.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kors.students.entity.Student;
 import ru.kors.students.service.StudentService;
 
@@ -21,6 +17,26 @@ public class StudentController {
     @GetMapping
     public List<Student> findAllStudents() {
         return studentService.findAllStudents();
+    }
+
+    @PostMapping("save_student")
+    public Student saveStudent(@RequestBody Student student) {
+        return studentService.saveStudent(student);
+    }
+
+    @GetMapping("/{email}")
+    public Student findByEmailStudent(@PathVariable String email) {
+        return studentService.findByEmailStudent(email);
+    }
+
+    @PutMapping("update_student")
+    public Student updateStudent(@PathVariable Student student) {
+        return studentService.updateStudent(student);
+    }
+
+    @DeleteMapping("delete_student/{email}")
+    public void deleteStudent(String email) {
+        studentService.deleteStudent(email);
     }
 
 }
